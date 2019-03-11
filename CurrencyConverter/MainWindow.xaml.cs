@@ -22,7 +22,13 @@ namespace CurrencyConverter
     {
         public MainWindow()
         {
+            var viewModel = new ViewModel();
+            DataContext = viewModel;
+
             InitializeComponent();
+
+            //viewModel.OutputText = "Mark";
+            //viewModel.OnPropertyChanged(nameof(ViewModel.OutputText));
         }
     }
 }
