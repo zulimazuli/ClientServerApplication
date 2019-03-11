@@ -1,13 +1,17 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
+using CurrencyConverter.ConvertServiceReference;
 
 namespace CurrencyConverter
 {
     internal class ViewModel : INotifyPropertyChanged
     {
-        public decimal InputNumber { get; set; }
+        public string InputNumber { get; set; }
         public string OutputText { get; set; }
+
+        private readonly ConvertServiceClient _wcfConvertServiceClient;
 
         private readonly DelegateCommand _convertNumberToWordsCommand;
         public ICommand ConvertNumberToWordsCommand => _convertNumberToWordsCommand;
@@ -19,14 +23,28 @@ namespace CurrencyConverter
 
         public ViewModel()
         {
+            _wcfConvertServiceClient = new ConvertServiceClient();
             _convertNumberToWordsCommand = new DelegateCommand(ConvertNumberToWords);
         }    
         
         private void ConvertNumberToWords(object commandParameter)
         {
-            //wcf service goes here
-            OutputText = "Changes were made.";
-            OnPropertyChanged(nameof(OutputText));
+            try
+            {
+                var prasingResult = decimal.Parse(InputNumber);
+
+                //wcf service goes here
+                OutputText = _wcfConvertServiceClient.ConvertNumberToCurrencyWords(prasingResult);
+                OnPropertyChanged(nameof(OutputText));
+            }
+            catch(Exception e)
+            {
+                MessageBoxResult result = MessageBox.Show($"{e.Message}",
+                                          "Error",
+                                          MessageBoxButton.OK,
+                                          MessageBoxImage.Warning);
+            }
+            
         }
     }
 
@@ -43,11 +61,11 @@ namespace CurrencyConverter
 
         public bool CanExecute(object parameter) => true;
 
-        public event EventHandler CanExecuteChanged
-        {
-            add { throw new NotSupportedException(); }
-            remove { }
-        }
+        public event EventHandler CanExecuteChanged;
+        //{
+        //    add { throw new NotSupportedException(); }
+        //    remove { }
+        //}
     }
 
 
