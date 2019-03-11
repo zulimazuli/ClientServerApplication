@@ -12,14 +12,15 @@ namespace WcfService
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class ConvertService : IConvertService
     {
-        public string TestService()
+        public string TestService(decimal value)
         {
-            return "Service is doing fine :)";
+            return string.Format("value: {0}", value);
         }
 
-        public string ConvertNumberToCurrencyWords(double value)
-        {
-            return string.Format("zero dollars");
+        public string ConvertNumberToCurrencyWords(decimal value)
+        { 
+            
+            return string.Format("value: {0}",value);
         }
     }
 }
