@@ -10,6 +10,11 @@ namespace WcfService.CurrencyToWords
     public class CurrencyToWordsConverter : ICurrencyToWordsConverter
     {
         private readonly IConverterHelper helper;
+        private const int _maxPower = 6;
+
+        private const string _currencyName = "dollar";
+        private const string _currencyCent = "cent";
+
         public CurrencyToWordsConverter()
         {
             helper = new ConverterHelper();
@@ -18,7 +23,7 @@ namespace WcfService.CurrencyToWords
         public string ConvertCurrencyToWords(decimal value)
         {
             if (value == 0)
-                return "zero";                     
+                return string.Format("zero {0}", _currencyName);                     
                         
             var wholeNumber = decimal.Truncate(value);
             var points = (value - wholeNumber) * 100;
@@ -26,7 +31,7 @@ namespace WcfService.CurrencyToWords
             StringBuilder numberBuilder = new StringBuilder();
             if (wholeNumber > 0)
             {
-                int power = 6;
+                int power = _maxPower;
                 while (power >= 0)
                 {
                     int partNumber = decimal.ToInt32(wholeNumber % (int)Math.Pow(10, power + 3) / (int)Math.Pow(10, power));
@@ -38,14 +43,17 @@ namespace WcfService.CurrencyToWords
                     power -= 3;
                 }
 
-                numberBuilder.Append(" dollars");
+                var currency = wholeNumber % 10 == 1 ? _currencyName : _currencyName + "s";
+                numberBuilder.Append(" ").Append(currency);
             }
             
             if(points > 0)
             {
-                numberBuilder.Append(" and ");
+                numberBuilder.Append(wholeNumber > 0 ? " and ": "");
                 numberBuilder.Append(ConvertNumberToWords((int)points));
-                numberBuilder.Append(" cents");
+
+                var currencyCent = points % 10 == 1 ? _currencyCent : _currencyCent + "s";
+                numberBuilder.Append(" ").Append(currencyCent);
             }
             
             return numberBuilder.ToString();
@@ -74,20 +82,18 @@ namespace WcfService.CurrencyToWords
             }
             else if (tens > 0 && tens < 2)
             {
-                sb.Append(helper.ConvertTeensToWord(tens*10 + unity));
+                sb.Append(helper.ConvertTensToWord(tens*10 + unity));
                 
             }
             else if(tens >= 2)
             {
-                sb.Append(helper.ConvertTeensToWord(tens*10));
+                sb.Append(helper.ConvertTensToWord(tens*10));
                 sb.Append(unity > 0 ? "-" : "");
                 sb.Append(helper.ConvertDigitToWord(unity));
 
             }
 
             return sb.ToString();
-        }
-
-        
+        }        
     }
 }

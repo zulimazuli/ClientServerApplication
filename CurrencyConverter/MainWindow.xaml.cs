@@ -26,9 +26,6 @@ namespace CurrencyConverter
             DataContext = viewModel;
 
             InitializeComponent();
-
-            //viewModel.OutputText = "Mark";
-            //viewModel.OnPropertyChanged(nameof(ViewModel.OutputText));
         }
     }
 }

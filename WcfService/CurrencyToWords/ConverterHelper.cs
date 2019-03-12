@@ -9,20 +9,15 @@ namespace WcfService.CurrencyToWords
     public class ConverterHelper : IConverterHelper
     {
         private Dictionary<int, string> PowerName = new Dictionary<int, string>
-            {
-                {0, "" },
-                {2, " hundred " },
-                {3, " thousand " },
-                {6, " million " }
-            };
-
-        public ConverterHelper()
         {
-
-        }
+            {0, "" },
+            {2, "hundred" },
+            {3, "thousand" },
+            {6, "million" }
+        };
         public string GetPowerName(int power)
         {
-            return PowerName[power];
+            return $" {PowerName[power]} ";
         }
         public string ConvertDigitToWord(int digit)
         {
@@ -43,7 +38,7 @@ namespace WcfService.CurrencyToWords
             };
         }
 
-        public string ConvertTeensToWord(int number)
+        public string ConvertTensToWord(int number)
         {
             switch (number)
             {

@@ -4,6 +4,6 @@
     {
         string GetPowerName(int power);
         string ConvertDigitToWord(int digit);
-        string ConvertTeensToWord(int number);
+        string ConvertTensToWord(int number);
     }
 }
