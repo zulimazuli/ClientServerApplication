@@ -10,14 +10,13 @@ namespace WcfService.CurrencyToWords
     {
         private Dictionary<int, string> PowerName = new Dictionary<int, string>
         {
-            {0, "" },
             {2, "hundred" },
             {3, "thousand" },
             {6, "million" }
         };
         public string GetPowerName(int power)
         {
-            return $" {PowerName[power]} ";
+            return power != 0 ? $" {PowerName[power]} " : string.Empty;
         }
         public string ConvertDigitToWord(int digit)
         {

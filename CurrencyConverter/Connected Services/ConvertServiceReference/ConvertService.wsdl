@@ -6,12 +6,6 @@
       <xsd:import schemaLocation="http://localhost:51021/ConvertService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IConvertService_TestService_InputMessage">
-    <wsdl:part name="parameters" element="tns:TestService" />
-  </wsdl:message>
-  <wsdl:message name="IConvertService_TestService_OutputMessage">
-    <wsdl:part name="parameters" element="tns:TestServiceResponse" />
-  </wsdl:message>
   <wsdl:message name="IConvertService_ConvertNumberToCurrencyWords_InputMessage">
     <wsdl:part name="parameters" element="tns:ConvertNumberToCurrencyWords" />
   </wsdl:message>
@@ -19,10 +13,6 @@
     <wsdl:part name="parameters" element="tns:ConvertNumberToCurrencyWordsResponse" />
   </wsdl:message>
   <wsdl:portType name="IConvertService">
-    <wsdl:operation name="TestService">
-      <wsdl:input wsaw:Action="http://tempuri.org/IConvertService/TestService" message="tns:IConvertService_TestService_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IConvertService/TestServiceResponse" message="tns:IConvertService_TestService_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="ConvertNumberToCurrencyWords">
       <wsdl:input wsaw:Action="http://tempuri.org/IConvertService/ConvertNumberToCurrencyWords" message="tns:IConvertService_ConvertNumberToCurrencyWords_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IConvertService/ConvertNumberToCurrencyWordsResponse" message="tns:IConvertService_ConvertNumberToCurrencyWords_OutputMessage" />
@@ -30,15 +20,6 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IConvertService" type="tns:IConvertService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="TestService">
-      <soap:operation soapAction="http://tempuri.org/IConvertService/TestService" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ConvertNumberToCurrencyWords">
       <soap:operation soapAction="http://tempuri.org/IConvertService/ConvertNumberToCurrencyWords" style="document" />
       <wsdl:input>

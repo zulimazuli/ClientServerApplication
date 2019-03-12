@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using WcfService.CurrencyToWords;
+using WcfService.Interfaces;
 
 namespace WcfService
 {
@@ -13,11 +14,6 @@ namespace WcfService
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class ConvertService : IConvertService
     {
-        public string TestService(decimal value)
-        {
-            return string.Format("value: {0}", value);
-        }
-
         public string ConvertNumberToCurrencyWords(string value)
         {
             decimal validNumber = decimal.Parse(value);

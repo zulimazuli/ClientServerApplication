@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-using CurrencyConverter.ConvertServiceReference;
 
 namespace CurrencyConverter
 {
@@ -11,10 +10,11 @@ namespace CurrencyConverter
         public string InputNumber { get; set; }
         public string OutputText { get; set; }
 
-        private readonly ConvertServiceClient _wcfConvertServiceClient;
+        private readonly IConvertService _wcfConvertService;
+        private readonly IInputValidator _inputValidator;
 
-        private readonly DelegateCommand _convertNumberToWordsCommand;
-        public ICommand ConvertNumberToWordsCommand => _convertNumberToWordsCommand;
+        private readonly DelegateCommand _convertCommand;
+        public ICommand ConvertCommand => _convertCommand;
 
         #region INotifyPropertyChanged members
         public event PropertyChangedEventHandler PropertyChanged;
@@ -23,29 +23,38 @@ namespace CurrencyConverter
 
         public ViewModel()
         {
-            _wcfConvertServiceClient = new ConvertServiceClient();
-            _convertNumberToWordsCommand = new DelegateCommand(ConvertNumberToWords);
+            _wcfConvertService = new ConvertService();
+            _inputValidator = new InputValidator();
+            _convertCommand = new DelegateCommand(ConvertToWordsCommand);
         }    
         
-        private void ConvertNumberToWords(object commandParameter)
+        private void ConvertToWordsCommand(object commandParameter)
         {
-            try
+            if (_inputValidator.Validate(InputNumber))
             {
-                //VALIDATION
-                //var prasingResult = decimal.Parse(InputNumber);
-
-                //wcf service goes here
-                OutputText = _wcfConvertServiceClient.ConvertNumberToCurrencyWords(InputNumber);
-                OnPropertyChanged(nameof(OutputText));
+                try
+                {
+                    OutputText = _wcfConvertService.ConvertNumberToWords(InputNumber);
+                    OnPropertyChanged(nameof(OutputText));
+                }
+                catch (Exception e)
+                {
+                    MessageBoxResult result = MessageBox.Show($"{e.Message}", "Error",
+                                                MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
-            catch(Exception e)
+            else
             {
-                MessageBoxResult result = MessageBox.Show($"{e.Message}",
-                                          "Error",
-                                          MessageBoxButton.OK,
-                                          MessageBoxImage.Warning);
+                ShowIncorrectInputMessageBox();
             }
             
+        }
+
+        private void ShowIncorrectInputMessageBox()
+        {
+            var message = string.Join("\n", _inputValidator.GetValidationErrors());
+            MessageBoxResult result = MessageBox.Show(message, "Error",
+                                                        MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 
@@ -63,10 +72,6 @@ namespace CurrencyConverter
         public bool CanExecute(object parameter) => true;
 
         public event EventHandler CanExecuteChanged;
-        //{
-        //    add { throw new NotSupportedException(); }
-        //    remove { }
-        //}
     }
 
 

@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WcfService\WcfService.csproj" />
+    <ProjectReference Include="..\CurrencyConverter\CurrencyConverter.csproj" />
   </ItemGroup>
 
 </Project>

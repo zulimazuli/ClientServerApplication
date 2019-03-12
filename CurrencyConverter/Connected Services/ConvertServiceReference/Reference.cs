@@ -15,12 +15,6 @@ namespace CurrencyConverter.ConvertServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ConvertServiceReference.IConvertService")]
     public interface IConvertService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IConvertService/TestService", ReplyAction="http://tempuri.org/IConvertService/TestServiceResponse")]
-        string TestService(decimal value);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IConvertService/TestService", ReplyAction="http://tempuri.org/IConvertService/TestServiceResponse")]
-        System.Threading.Tasks.Task<string> TestServiceAsync(decimal value);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IConvertService/ConvertNumberToCurrencyWords", ReplyAction="http://tempuri.org/IConvertService/ConvertNumberToCurrencyWordsResponse")]
         string ConvertNumberToCurrencyWords(string value);
         
@@ -53,14 +47,6 @@ namespace CurrencyConverter.ConvertServiceReference {
         
         public ConvertServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
-        }
-        
-        public string TestService(decimal value) {
-            return base.Channel.TestService(value);
-        }
-        
-        public System.Threading.Tasks.Task<string> TestServiceAsync(decimal value) {
-            return base.Channel.TestServiceAsync(value);
         }
         
         public string ConvertNumberToCurrencyWords(string value) {

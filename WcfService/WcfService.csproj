@@ -72,7 +72,7 @@
     <Compile Include="CurrencyToWords\ConverterHelper.cs" />
     <Compile Include="CurrencyToWords\CurrencyToWordsConverter.cs" />
     <Compile Include="Interfaces\IConverterHelper.cs" />
-    <Compile Include="IConvertService.cs" />
+    <Compile Include="Interfaces\IConvertService.cs" />
     <Compile Include="Interfaces\ICurrencyToWordsConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

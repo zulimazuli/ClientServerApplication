@@ -26,7 +26,7 @@
         <Label Grid.Column="0" Grid.Row="1" Content="Input:" HorizontalAlignment="Right" VerticalAlignment="Top"/>
         <TextBox Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" Text="{Binding Path=InputNumber}" VerticalAlignment="Center"/>
 
-        <Button Grid.Column="3" Grid.Row="1" Content="Convert" Command="{Binding Path=ConvertNumberToWordsCommand}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
+        <Button Grid.Column="3" Grid.Row="1" Content="Convert" Command="{Binding Path=ConvertCommand}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
 
         <Label Grid.Column="0" Grid.Row="4" Content="Output:" HorizontalAlignment="Right" VerticalAlignment="Top"/>
         <TextBox Grid.Column="2" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Path=OutputText}" VerticalAlignment="Stretch" IsReadOnly="True"/>

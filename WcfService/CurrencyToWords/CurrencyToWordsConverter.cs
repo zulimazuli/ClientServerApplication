@@ -14,21 +14,25 @@ namespace WcfService.CurrencyToWords
 
         private const string _currencyName = "dollar";
         private const string _currencyCent = "cent";
+        private const string _currencyNamePlural = "dollars";
+        private const string _currencyCentPlural = "cents";
 
         public CurrencyToWordsConverter()
         {
+
+
             helper = new ConverterHelper();
         }
 
         public string ConvertCurrencyToWords(decimal value)
         {
             if (value == 0)
-                return string.Format("zero {0}", _currencyName);                     
-                        
+                return GetZeroDollars();
+
             var wholeNumber = decimal.Truncate(value);
             var points = (value - wholeNumber) * 100;
 
-            StringBuilder numberBuilder = new StringBuilder();
+            StringBuilder wholeBuilder = new StringBuilder();
             if (wholeNumber > 0)
             {
                 int power = _maxPower;
@@ -37,26 +41,36 @@ namespace WcfService.CurrencyToWords
                     int partNumber = decimal.ToInt32(wholeNumber % (int)Math.Pow(10, power + 3) / (int)Math.Pow(10, power));
                     if (partNumber > 0)
                     {
-                        numberBuilder.Append(ConvertNumberToWords(partNumber));
-                        numberBuilder.Append(helper.GetPowerName(power));
+                        wholeBuilder.Append(ConvertNumberToWords(partNumber));
+                        wholeBuilder.Append(helper.GetPowerName(power));
                     }
                     power -= 3;
                 }
 
-                var currency = wholeNumber % 10 == 1 ? _currencyName : _currencyName + "s";
-                numberBuilder.Append(" ").Append(currency);
+                var currency = wholeNumber % 10 == 1 ? _currencyName : _currencyNamePlural;
+                wholeBuilder.Append(" ").Append(currency);
             }
-            
-            if(points > 0)
+            else
             {
-                numberBuilder.Append(wholeNumber > 0 ? " and ": "");
-                numberBuilder.Append(ConvertNumberToWords((int)points));
+                wholeBuilder.Append(GetZeroDollars());
+            }
+
+            StringBuilder pointsBuilder = new StringBuilder();
+            if (points > 0)
+            {
+                pointsBuilder.Append(" and ");
+                pointsBuilder.Append(ConvertNumberToWords((int)points));
 
                 var currencyCent = points % 10 == 1 ? _currencyCent : _currencyCent + "s";
-                numberBuilder.Append(" ").Append(currencyCent);
+                pointsBuilder.Append(" ").Append(currencyCent);
             }
-            
-            return numberBuilder.ToString();
+
+            return wholeBuilder.ToString() + pointsBuilder.ToString();
+        }
+
+        private string GetZeroDollars()
+        {
+            return string.Format("{0} {1}", "zero", _currencyNamePlural);
         }
 
         private string ConvertNumberToWords(int number)
@@ -73,7 +87,7 @@ namespace WcfService.CurrencyToWords
             if(hundreds > 0)
             {
                 sb.Append(helper.ConvertDigitToWord(hundreds));
-                sb.Append(" hundred ");
+                sb.Append(helper.GetPowerName(2));
             }
 
             if (tens == 0)
