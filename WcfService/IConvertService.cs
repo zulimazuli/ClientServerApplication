@@ -17,7 +17,7 @@ namespace WcfService
         string TestService(decimal value);
 
         [OperationContract]
-        string ConvertNumberToCurrencyWords(decimal value);
+        string ConvertNumberToCurrencyWords(string value);
 
     }
 }

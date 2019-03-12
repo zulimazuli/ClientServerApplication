@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using WcfService.CurrencyToWords;
 
 namespace WcfService
 {
@@ -17,10 +18,14 @@ namespace WcfService
             return string.Format("value: {0}", value);
         }
 
-        public string ConvertNumberToCurrencyWords(decimal value)
-        { 
-            
-            return string.Format("value: {0}",value);
+        public string ConvertNumberToCurrencyWords(string value)
+        {
+            decimal validNumber = decimal.Parse(value);
+
+            CurrencyToWordsConverter converter = new CurrencyToWordsConverter();
+            var result = converter.ConvertCurrencyToWords(validNumber);
+
+            return string.Format(result);
         }
     }
 }

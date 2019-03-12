@@ -22,10 +22,10 @@ namespace CurrencyConverter.ConvertServiceReference {
         System.Threading.Tasks.Task<string> TestServiceAsync(decimal value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IConvertService/ConvertNumberToCurrencyWords", ReplyAction="http://tempuri.org/IConvertService/ConvertNumberToCurrencyWordsResponse")]
-        string ConvertNumberToCurrencyWords(decimal value);
+        string ConvertNumberToCurrencyWords(string value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IConvertService/ConvertNumberToCurrencyWords", ReplyAction="http://tempuri.org/IConvertService/ConvertNumberToCurrencyWordsResponse")]
-        System.Threading.Tasks.Task<string> ConvertNumberToCurrencyWordsAsync(decimal value);
+        System.Threading.Tasks.Task<string> ConvertNumberToCurrencyWordsAsync(string value);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -63,11 +63,11 @@ namespace CurrencyConverter.ConvertServiceReference {
             return base.Channel.TestServiceAsync(value);
         }
         
-        public string ConvertNumberToCurrencyWords(decimal value) {
+        public string ConvertNumberToCurrencyWords(string value) {
             return base.Channel.ConvertNumberToCurrencyWords(value);
         }
         
-        public System.Threading.Tasks.Task<string> ConvertNumberToCurrencyWordsAsync(decimal value) {
+        public System.Threading.Tasks.Task<string> ConvertNumberToCurrencyWordsAsync(string value) {
             return base.Channel.ConvertNumberToCurrencyWordsAsync(value);
         }
     }

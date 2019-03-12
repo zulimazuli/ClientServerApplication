@@ -31,10 +31,11 @@ namespace CurrencyConverter
         {
             try
             {
-                var prasingResult = decimal.Parse(InputNumber);
+                //VALIDATION
+                //var prasingResult = decimal.Parse(InputNumber);
 
                 //wcf service goes here
-                OutputText = _wcfConvertServiceClient.ConvertNumberToCurrencyWords(prasingResult);
+                OutputText = _wcfConvertServiceClient.ConvertNumberToCurrencyWords(InputNumber);
                 OnPropertyChanged(nameof(OutputText));
             }
             catch(Exception e)
