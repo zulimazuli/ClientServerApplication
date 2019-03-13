@@ -3,6 +3,7 @@ using NUnit.Framework;
 
 namespace Tests
 {
+    [TestFixture]
     public class InputValidatorTests
     {
         private IInputValidator _inputValidator;

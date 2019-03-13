@@ -47,7 +47,7 @@ namespace WcfService.CurrencyToWords
                     power -= 3;
                 }
 
-                var currency = wholeNumber % 10 == 1 ? _currencyName : _currencyNamePlural;
+                var currency = wholeNumber == 1 ? _currencyName : _currencyNamePlural;
                 wholeBuilder.Append(" ").Append(currency);
             }
             else
@@ -61,11 +61,16 @@ namespace WcfService.CurrencyToWords
                 pointsBuilder.Append(" and ");
                 pointsBuilder.Append(ConvertNumberToWords((int)points));
 
-                var currencyCent = points % 10 == 1 ? _currencyCent : _currencyCent + "s";
+                var currencyCent = points == 1 ? _currencyCent : _currencyCentPlural;
                 pointsBuilder.Append(" ").Append(currencyCent);
             }
 
-            return wholeBuilder.ToString() + pointsBuilder.ToString();
+            var result = wholeBuilder.ToString() + pointsBuilder.ToString();
+            
+            //todo: to fix - ugly workaround
+            result = result.Replace("  ", " ");
+
+            return result;
         }
 
         private string GetZeroDollars()
