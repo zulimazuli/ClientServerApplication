@@ -1,68 +1,67 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using WcfService.Interfaces;
 
 namespace WcfService.CurrencyToWords
 {
-    public class ConverterHelper : IConverterHelper
+    public static class ConverterHelper
     {
-        private Dictionary<int, string> PowerName = new Dictionary<int, string>
+        public const string CurrencyName = "dollar";
+        public const string CurrencyCentName = "cent";
+        public const string CurrencyNamePlural = "dollars";
+        public const string CurrencyCentPlural = "cents";
+        
+        public static string GetPowerName(int power)
         {
-            {2, "hundred" },
-            {3, "thousand" },
-            {6, "million" }
-        };
-        public string GetPowerName(int power)
-        {
-            return power != 0 ? $" {PowerName[power]} " : string.Empty;
-        }
-        public string ConvertDigitToWord(int digit)
-        {
-            switch (digit)
+            return power switch
             {
-                case 0: return string.Empty;
-                case 1: return "one";
-                case 2: return "two";
-                case 3: return "three";
-                case 4: return "four";
-                case 5: return "five";
-                case 6: return "six";
-                case 7: return "seven";
-                case 8: return "eight";
-                case 9: return "nine";
-                default:
-                    throw new ArgumentOutOfRangeException();
+                2 => "hundred",
+                3 => "thousand",
+                6 => "million",
+                _ => string.Empty
+            };
+        }
+        
+        public static string ConvertDigitToWord(int digit)
+        {
+            return digit switch
+            {
+                0 => string.Empty,
+                1 => "one",
+                2 => "two",
+                3 => "three",
+                4 => "four",
+                5 => "five",
+                6 => "six",
+                7 => "seven",
+                8 => "eight",
+                9 => "nine",
+                _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        public string ConvertTensToWord(int number)
+        public static string ConvertTensToWord(int number)
         {
-            switch (number)
+            return number switch
             {
-                case 10: return "ten";
-                case 11: return "eleven";
-                case 12: return "twelve";
-                case 13: return "thirteen";
-                case 14: return "fourteen";
-                case 15: return "fiveteen";
-                case 16: return "sixteen";
-                case 17: return "seventeen";
-                case 18: return "eighteen";
-                case 19: return "nineteen";
-                case 20: return "twenty";
-                case 30: return "thirty";
-                case 40: return "forty";
-                case 50: return "fifty";
-                case 60: return "sixty";
-                case 70: return "seventy";
-                case 80: return "eighty";
-                case 90: return "ninety";
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+                10 => "ten",
+                11 => "eleven",
+                12 => "twelve",
+                13 => "thirteen",
+                14 => "fourteen",
+                15 => "fifteen",
+                16 => "sixteen",
+                17 => "seventeen",
+                18 => "eighteen",
+                19 => "nineteen",
+                20 => "twenty",
+                30 => "thirty",
+                40 => "forty",
+                50 => "fifty",
+                60 => "sixty",
+                70 => "seventy",
+                80 => "eighty",
+                90 => "ninety",
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
     }
 }

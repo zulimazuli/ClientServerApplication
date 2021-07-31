@@ -5,14 +5,14 @@ VisualStudioVersion = 15.0.28307.438
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfService", "WcfService\WcfService.csproj", "{0BDC1748-AB71-4E1E-9B5D-786735692C20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyConverter", "CurrencyConverter\CurrencyConverter.csproj", "{81163819-2A4C-4230-9105-C73EB2293816}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyToWordsConverter", "CurrencyToWordsConverter\CurrencyToWordsConverter.csproj", "{81163819-2A4C-4230-9105-C73EB2293816}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0BDC1748-AB71-4E1E-9B5D-786735692C20} = {0BDC1748-AB71-4E1E-9B5D-786735692C20}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfService.Tests", "WcfService.Tests\WcfService.Tests.csproj", "{3BD2A606-1895-493C-B2A7-0ECE0432A7FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyConverter.Tests", "CurrencyConverter.Tests\CurrencyConverter.Tests.csproj", "{1F9AB986-5F30-481D-A58A-6FFA611A61DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyToWordsConverter.Tests", "CurrencyToWordsConverter.Tests\CurrencyToWordsConverter.Tests.csproj", "{1F9AB986-5F30-481D-A58A-6FFA611A61DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

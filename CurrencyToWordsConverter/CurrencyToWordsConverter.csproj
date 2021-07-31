@@ -6,15 +6,16 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{81163819-2A4C-4230-9105-C73EB2293816}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>CurrencyConverter</RootNamespace>
-    <AssemblyName>CurrencyConverter</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>CurrencyToWordsConverter</RootNamespace>
+    <AssemblyName>CurrencyToWordsConverter</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
+    <LangVersion>8</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -63,7 +64,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="InputValidator.cs" />
+    <Compile Include="DelegateCommand.cs" />
+    <Compile Include="IConvertService.cs" />
+    <Compile Include="Validator\InputValidator.cs" />
+    <Compile Include="Validator\IInputValidator.cs" />
+    <Compile Include="Validator\ValidatorResult.cs" />
     <Compile Include="ViewModel.cs" />
     <Compile Include="ConvertService.cs" />
     <Page Include="MainWindow.xaml">

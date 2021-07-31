@@ -16,9 +16,9 @@ namespace WcfService
     {
         public string ConvertNumberToCurrencyWords(string value)
         {
-            decimal validNumber = decimal.Parse(value);
+            var validNumber = decimal.Parse(value);
 
-            CurrencyToWordsConverter converter = new CurrencyToWordsConverter();
+            var converter = new CurrencyToWordsConverter();
             var result = converter.ConvertCurrencyToWords(validNumber);
 
             return string.Format(result);

@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Input;
+using CurrencyToWordsConverter.Validator;
 
-namespace CurrencyConverter
+namespace CurrencyToWordsConverter
 {
     internal class ViewModel : INotifyPropertyChanged
     {
@@ -30,49 +33,35 @@ namespace CurrencyConverter
         
         private void ConvertToWordsCommand(object commandParameter)
         {
-            if (_inputValidator.Validate(InputNumber))
+            var validation = _inputValidator.Validate(InputNumber);
+            if (validation.IsValid)
             {
                 try
                 {
                     OutputText = _wcfConvertService.ConvertNumberToWords(InputNumber);
                     OnPropertyChanged(nameof(OutputText));
                 }
+                catch (EndpointNotFoundException e)
+                {
+                    MessageBox.Show($"Could not connect to the server.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
                 catch (Exception e)
                 {
-                    MessageBoxResult result = MessageBox.Show($"{e.Message}", "Error",
-                                                MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show($"{e.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
             else
             {
-                ShowIncorrectInputMessageBox();
+                ShowErrorMessageBox(validation.ValidationErrors);
             }
             
         }
 
-        private void ShowIncorrectInputMessageBox()
+        private static void ShowErrorMessageBox(IEnumerable<string> errors)
         {
-            var message = string.Join("\n", _inputValidator.GetValidationErrors());
-            MessageBoxResult result = MessageBox.Show(message, "Error",
-                                                        MessageBoxButton.OK, MessageBoxImage.Warning);
+            var message = string.Join("\n", errors);
+            MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
-
-    public class DelegateCommand : ICommand
-    {
-        private readonly Action<object> _executeAction;
-
-        public DelegateCommand(Action<object> executeAction)
-        {
-            _executeAction = executeAction;
-        }
-
-        public void Execute(object parameter) => _executeAction(parameter);
-
-        public bool CanExecute(object parameter) => true;
-
-        public event EventHandler CanExecuteChanged;
-    }
-
-
 }
