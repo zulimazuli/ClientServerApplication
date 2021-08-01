@@ -14,6 +14,7 @@ namespace WcfService
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class ConvertService : IConvertService
     {
+        [Obsolete("This WCF service is obsolete. Use API project instead.")]
         public string ConvertNumberToCurrencyWords(string value)
         {
             var validNumber = decimal.Parse(value);

@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfService.Tests", "WcfServ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyToWordsConverter.Tests", "CurrencyToWordsConverter.Tests\CurrencyToWordsConverter.Tests.csproj", "{1F9AB986-5F30-481D-A58A-6FFA611A61DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyToWordsConverter.API", "CurrencyToWordsConverter.API\CurrencyToWordsConverter.API.csproj", "{BBD03F3C-1E6C-44DA-B9F2-81E5A9004D85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{1F9AB986-5F30-481D-A58A-6FFA611A61DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F9AB986-5F30-481D-A58A-6FFA611A61DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F9AB986-5F30-481D-A58A-6FFA611A61DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBD03F3C-1E6C-44DA-B9F2-81E5A9004D85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBD03F3C-1E6C-44DA-B9F2-81E5A9004D85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBD03F3C-1E6C-44DA-B9F2-81E5A9004D85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBD03F3C-1E6C-44DA-B9F2-81E5A9004D85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
